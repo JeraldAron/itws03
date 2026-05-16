@@ -1,0 +1,16 @@
+{
+    "name": "jerald/jobseek",
+    "description": "Job seeker application",
+    "authors" : [
+        {
+            "name": "Jerald Aron V Pangilinan",
+            "email": "jeraldaron10@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "Framework/",
+            "App\\": "App/"
+        }
+    }
+}
