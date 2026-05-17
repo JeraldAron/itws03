@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace Framework;
 
 class Session
@@ -21,7 +22,7 @@ class Session
      * @param mixed $value
      * @return void
      */
-    public static function set($key, $value) : void
+    public static function set($key, $value): void
     {
         $_SESSION[$key] = $value;
     }
@@ -31,7 +32,8 @@ class Session
     * @return mixed
     *@return void
     */
-    public static function get($key, $default = null){
+    public static function get($key, $default = null)
+    {
         return isset($_SESSION[$key]) ? $_SESSION[$key] : $default;
     }
     /** 
@@ -39,7 +41,7 @@ class Session
      * 
      * @param string $key
      * @return bool
-    */
+     */
     public static function has($key)
     {
         return isset($_SESSION[$key]);
@@ -48,22 +50,20 @@ class Session
      *clear session by key
      * @param string $key
      * @return void
-    */
-     public static function clear($key)
-     {
-        if(isset($_SESSION[$key])) {
-            unset($_SESSION[$key]); 
-            
+     */
+    public static function clear($key)
+    {
+        if (isset($_SESSION[$key])) {
+            unset($_SESSION[$key]);
         }
-       
-     }
+    }
 
 
 
-     /** 
-      * clear all sessions 
-      * 
-      * @return void
+    /** 
+     * clear all sessions 
+     * 
+     * @return void
      */
     public static function clearAll()
     {
@@ -71,6 +71,32 @@ class Session
         session_destroy();
     }
 
-    
+    /** 
+     * Set flash message
+     * 
+     * @param string $key
+     * @param string $message
+     * @return void
+     */
+    public static function setFlashMessage($key, $message)
+    {
+        self::set('flash_' . $key, $message);
+    }
+    /** 
+     * Get flash message
+     *
+     * @param string $key
+     * @param mixed $default
+     * @return void
+     */
+    public static function getFlashMessage($key, $default = null)
+    {
+        $message = self::get('flash_' . $key, $default);
+        self::clear('flash_' . $key);
+        return $message;
+    }
 
-}   
+    /** 
+     * 
+     */
+}
