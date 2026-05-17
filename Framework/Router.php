@@ -39,6 +39,7 @@ class Router
     public function get($uri, $controller)
     {
         $this->registerRoute('GET', $uri, $controller);
+
     }
 
     /**
@@ -90,6 +91,11 @@ class Router
     public function route($uri)
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
+
+        // Allow method spoofing via hidden _method field (PUT, DELETE, etc.)
+        if ($requestMethod === 'POST' && isset($_POST['_method'])) {
+            $requestMethod = strtoupper($_POST['_method']);
+        }
         foreach ($this->routes as $route) {
             // Split the current URI into segments
             $uriSegments = explode('/', trim($uri, '/'));
@@ -99,7 +105,7 @@ class Router
 
             $match = true;
 
-            if (count($uriSegments) === count($routeSegments) && strtoupper($route['method'] === $requestMethod)) {
+            if (count($uriSegments) === count($routeSegments) && strtoupper($route['method']) === $requestMethod) {
                 $params = [];
 
                 $match = true;
