@@ -156,16 +156,24 @@
 
     <!-- Navigation -->
     <nav class="js-navbar__nav" aria-label="Main navigation">
-      <a href="/auth/login" class="js-navbar__link">
-        <i class="fa fa-right-to-bracket" aria-hidden="true"></i> Login
-      </a>
-      <a href="/auth/register" class="js-navbar__link">
-        <i class="fa fa-user-plus" aria-hidden="true"></i> Register
-      </a>
-      <div class="js-navbar__link--divider" role="separator"></div>
-      <a href="/listings/create" class="js-navbar__cta" id="navbar-post-job-btn">
-        <i class="fa fa-pen-to-square" aria-hidden="true"></i> Post a Job
-      </a>
+      <?php if(\Framework\Session::has('user')) : ?>
+        <a href="/listings/create" class="js-navbar__cta" id="navbar-post-job-btn">
+          <i class="fa fa-pen-to-square" aria-hidden="true"></i> Post a Job
+        </a>
+        <div class="js-navbar__link--divider" role="separator"></div>
+        <form method="POST" action="/auth/logout" style="display:inline;">
+          <button type="submit" class="js-navbar__link" style="background:none; border:none; cursor:pointer; font-family:inherit; font-size:inherit;">
+            <i class="fa fa-right-to-bracket" aria-hidden="true"></i> Logout
+          </button>
+        </form>
+      <?php else : ?>
+        <a href="/auth/login" class="js-navbar__link">
+          <i class="fa fa-right-to-bracket" aria-hidden="true"></i> Login
+        </a>
+        <a href="/auth/register" class="js-navbar__link">
+          <i class="fa fa-user-plus" aria-hidden="true"></i> Register
+        </a>
+      <?php endif; ?>
     </nav>
 
   </div>

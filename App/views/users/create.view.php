@@ -56,6 +56,7 @@
                     name="password_confirmation"
                     placeholder="Confirm Password"
                     class="w-full px-4 py-2 border rounded focus:outline-none" />
+
             </div>
             <button
                 type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none">
